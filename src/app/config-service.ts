@@ -2,6 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
+
+export const APP_BACKEND_SERVER = "backendAddress";
+
+
 @Injectable({
   providedIn: 'root'
 })
