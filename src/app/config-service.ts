@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 
 
 export const APP_BACKEND_SERVER = "backendAddress";
+export const APP_ENVIRONMENT = "environment";
 
 
 @Injectable({
@@ -14,10 +15,10 @@ export class ConfigService {
   private configData: any = null;
 
   loadConfig(): Observable<any> {
-    const configUrl = '/assets/config/config.development.json';
+    let configUrl = '/assets/config/config.development.json';
 
     if (window.location.pathname.includes('http://app-production')) {
-      console.warn('Running in production mode. Config data:');
+      configUrl = '/assets/config/config.production.json';
     }
 
     return this.http.get(configUrl).pipe(

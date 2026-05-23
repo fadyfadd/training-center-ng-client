@@ -1,3 +1,4 @@
 {
+    "environment": "development",
     "backendAddress":"https://localhost:7053/"
 }
