@@ -9,5 +9,5 @@ export interface CourseDto {
     id?: number;
     title?: string;
     courseCategopryId?: number;
-    CourseCategory?: CourseCategoryDto;
+    courseCategory?: CourseCategoryDto;
 }

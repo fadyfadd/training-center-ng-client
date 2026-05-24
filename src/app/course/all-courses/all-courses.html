@@ -1,7 +1,13 @@
 <p>All Courses</p>
 
-<div class="mat-elevation-z8 table-container">
 
+<mat-form-field appearance="outline" style="width:100%">
+    <mat-label>Search Field</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Enter course name">
+</mat-form-field>
+
+
+<div class="mat-elevation-z8 table-container">
     <table matSort mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="id">
