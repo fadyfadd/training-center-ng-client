@@ -8,26 +8,117 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { CommonModule } from '@angular/common';
 import { CustomValidators } from '../../validations/custom-validators';
 import { NgForm } from '@angular/forms'
+import { inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../../config-service';
+import { APP_BACKEND_SERVER } from '../../config-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-register-student',
-  imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './register-student.html',
   styleUrl: './register-student.css',
 })
 export class RegisterStudent {
 
+  registerForm: FormGroup;
+  private configService: any = inject(ConfigService);
+  private snackBar = inject(MatSnackBar);
+  private fb: FormBuilder = inject(FormBuilder);
 
-  @ViewChild('form') formDirective!: NgForm;
+  @ViewChild('form') mainForm!: NgForm;
 
-  onReset() {
-
+  getLocalDateTimeString() {
     const d = new Date();
     var currentDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    return currentDate;
+  }
+
+  constructor(
+
+    private http: HttpClient,
+  ) {
+
+    this.registerForm = this.fb.group({
+      firstName: ['', [Validators.required, CustomValidators.noWhitespace()]],
+      lastName: ['', [Validators.required, CustomValidators.noWhitespace()]],
+      userName: [
+        '',
+        [Validators.required, CustomValidators.noWhitespace(), Validators.minLength(6)],
+      ],
+      email: ['', [Validators.required, Validators.email, CustomValidators.noWhitespace()]],
+      passwords: this.fb.group(
+        {
+          password: [
+            '',
+            [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()],
+          ],
+          confirmPassword: ['', []],
+        },
+        { validators: [this.passwordMatchValidator] },
+      ),
+      enrollmentDate: [
+        (() => {
+          return this.getLocalDateTimeString();
+        })(),
+        [Validators.required],
+      ],
+    });
+  }
+
+  onReset() {
+    const d = new Date();
+    var currentDate = this.getLocalDateTimeString();
     this.registerForm.markAsPristine();
     this.registerForm.markAsUntouched();
-    this.registerForm.reset(); 
+    this.registerForm.reset();
     this.registerForm.reset({ enrollmentDate: currentDate });
+  }
+
+  private handleSubmitServerError(error: HttpErrorResponse) {
+    var errors = Object.values(error.error.errors) as string[][];
+
+    console.log(errors);
+    if (errors.length > 0) {
+      const firstFieldErrors = errors[0];
+
+      if (Array.isArray(firstFieldErrors) && firstFieldErrors.length > 0) {
+        const firstError: string = firstFieldErrors[0];
+
+        this.snackBar.open(firstError, 'Close', {
+          duration: 5000,
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
+        });
+      }
+      else {
+        this.snackBar.open('Registration Error', 'Close', {
+          duration: 5000,
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
+        });
+
+      }
+    }
+    else {
+      this.snackBar.open('Registration Error', 'Close', {
+        duration: 5000,
+        horizontalPosition: 'left',
+        verticalPosition: 'bottom',
+      });
+    }
+
   }
 
   onSubmit() {
@@ -35,21 +126,27 @@ export class RegisterStudent {
     var student = {
       firstName: this.registerForm.get('firstName')?.value,
       lastName: this.registerForm.get('lastName')?.value,
-      enrollmentDate: this.registerForm.get('enrollmentDate')?.value
+      enrollmentDate: this.registerForm.get('enrollmentDate')?.value,
     };
 
     var applicationUser = {
       student: student,
       userName: this.registerForm.get('userName')?.value,
       email: this.registerForm.get('email')?.value,
-      plainPassword: this.registerForm.get('passwords')?.get('password')?.value
+      plainPassword: this.registerForm.get('passwords')?.get('password')?.value,
     };
 
-    console.log(this.registerForm.value);
-    console.log(applicationUser);
-    this.formDirective.resetForm();
-    this.onReset();
+    let backendAddress = this.configService.get(APP_BACKEND_SERVER);
 
+    this.http.post(`${backendAddress}api/User/register/student`, applicationUser).subscribe({
+      next: (response) => {
+        this.mainForm.resetForm();
+        this.onReset();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleSubmitServerError(error);
+      },
+    });
   }
 
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -62,43 +159,5 @@ export class RegisterStudent {
 
     return password === confirmPassword ? null : { passwordMismatch: true };
   };
-
-
-
-  registerForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-
-    const localDateTimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
-
-
-
-    this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required, CustomValidators.noWhitespace()]],
-      lastName: ['', [Validators.required, CustomValidators.noWhitespace()]],
-      userName: ['', [Validators.required, CustomValidators.noWhitespace(), Validators.minLength(6)]],
-      email: ['', [Validators.required, Validators.email, CustomValidators.noWhitespace()]],
-      passwords: this.fb.group({
-        password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],
-        confirmPassword: ['', []]
-      }, { validators: [this.passwordMatchValidator] }),
-      enrollmentDate: [
-        (() => {
-          const d = new Date();
-          return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-        })(),
-        [Validators.required]
-      ]
-
-    });
-  }
 
 }
