@@ -4,7 +4,8 @@ export const routes: Routes = [
 
     {
         "path": "", loadComponent: () => import("./student").then(m => m.Student), children: [
-            { "path": "all-students", loadComponent: () => import("./all-student/all-student").then(m => m.AllStudents) }
+            { "path": "all-students", loadComponent: () => import("./all-student/all-student").then(m => m.AllStudents) },
+            { "path": "register", loadComponent: () => import("./register-student/register-student").then(m => m.RegisterStudent) },
         ]
     },
 

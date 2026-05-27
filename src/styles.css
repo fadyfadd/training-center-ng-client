@@ -1,2 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+html,
+/* Clean global wrapper for page views */
+.page-content-wrapper {
+  display: block;
+  padding: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  
+}
