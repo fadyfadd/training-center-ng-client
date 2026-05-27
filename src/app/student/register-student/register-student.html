@@ -5,7 +5,7 @@
         </mat-card-header>
         <br>
         <mat-card-content>
-            <form class="profile-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <form class="profile-form" [formGroup]="registerForm" #form="ngForm"  (ngSubmit)="onSubmit()">
                 <div class="form-row">
                     <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>

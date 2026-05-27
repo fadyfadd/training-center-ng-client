@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CustomValidators } from '../../validations/custom-validators';
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'app-register-student',
@@ -17,12 +18,15 @@ import { CustomValidators } from '../../validations/custom-validators';
 export class RegisterStudent {
 
 
+  @ViewChild('form') formDirective!: NgForm;
+
   onReset() {
 
     const d = new Date();
     var currentDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     this.registerForm.markAsPristine();
     this.registerForm.markAsUntouched();
+    this.registerForm.reset(); 
     this.registerForm.reset({ enrollmentDate: currentDate });
   }
 
@@ -34,7 +38,16 @@ export class RegisterStudent {
       enrollmentDate: this.registerForm.get('enrollmentDate')?.value
     };
 
+    var applicationUser = {
+      student: student,
+      userName: this.registerForm.get('userName')?.value,
+      email: this.registerForm.get('email')?.value,
+      plainPassword: this.registerForm.get('passwords')?.get('password')?.value
+    };
+
     console.log(this.registerForm.value);
+    console.log(applicationUser);
+    this.formDirective.resetForm();
     this.onReset();
 
   }
@@ -75,7 +88,7 @@ export class RegisterStudent {
       email: ['', [Validators.required, Validators.email, CustomValidators.noWhitespace()]],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],
-        confirmPassword: ['', [Validators.required]]
+        confirmPassword: ['', []]
       }, { validators: [this.passwordMatchValidator] }),
       enrollmentDate: [
         (() => {
