@@ -26,27 +26,28 @@
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Email Address</mat-label>
-                        <input matInput   formControlName="email" placeholder="Ex. john@school.com">
+                        <input matInput formControlName="email" placeholder="Ex. john@school.com">
                         <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
                 </div>
 
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input matInput type="password" formControlName="password">
-                        <mat-icon matSuffix>password</mat-icon>
-                    </mat-form-field>
-                </div>
+                <div formGroupName="passwords">
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password">
+                            <mat-icon matSuffix>password</mat-icon>
+                        </mat-form-field>
+                    </div>
 
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Confirm Passsword</mat-label>
-                        <input matInput type="password" formControlName="confirmPassword">
-                        <mat-icon matSuffix>password</mat-icon>
-                    </mat-form-field>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Passsword</mat-label>
+                            <input matInput type="password" formControlName="confirmPassword">
+                            <mat-icon matSuffix>password</mat-icon>
+                        </mat-form-field>
+                    </div>
                 </div>
-
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Enrollment Date</mat-label>
@@ -78,17 +79,20 @@
         <li>Email cannot be empty or whitespace</li> }
         @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
         <li>Email is Invalid</li> }
-        @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
+        @if (registerForm.get('passwords')?.get('password')?.hasError('required') &&
+        registerForm.get('passwords')?.get('password')?.touched) {
         <li>Password is required</li> }
-        @if (registerForm.get('password')?.hasError('whitespace') && registerForm.get('password')?.touched) {
+        @if (registerForm.get('passwords')?.get('password')?.hasError('whitespace') &&
+        registerForm.get('passwords')?.get('password')?.touched) {
         <li>Password cannot be empty or whitespace</li> }
-        @if (registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched) {
+        @if (registerForm.get('passwords')?.get('password')?.hasError('minlength') &&
+        registerForm.get('passwords')?.get('password')?.touched) {
         <li>Password must be at least 6 characters long</li> }
         @if (registerForm.get('enrollmentDate')?.hasError('required') && registerForm.get('enrollmentDate')?.touched) {
         <li>Enrollment Date is Required</li> }
 
 
-        
+
 
 
     </ul>

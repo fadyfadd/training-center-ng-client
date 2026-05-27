@@ -55,8 +55,10 @@ export class RegisterStudent {
       firstName: ['', [Validators.required, CustomValidators.noWhitespace()]],
       lastName: ['', [Validators.required, CustomValidators.noWhitespace()]],
       email: ['', [Validators.required, Validators.email, CustomValidators.noWhitespace()]],
-      password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],
-      confirmPassword: ['', [Validators.required]],
+      passwords: this.fb.group({
+        password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],
+        confirmPassword: ['', [Validators.required]]
+      }, { validators: [] }),
       enrollmentDate: [
         (() => {
           const d = new Date();
