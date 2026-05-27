@@ -3,11 +3,14 @@
 
 
 html,
-/* Clean global wrapper for page views */
 .page-content-wrapper {
   display: block;
   padding: 24px;
   box-sizing: border-box;
   width: 100%;
-  
+}
+
+
+mat-form-field {
+  width: 100%;
 }

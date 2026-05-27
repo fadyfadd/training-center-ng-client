@@ -5,11 +5,11 @@
         </mat-card-header>
         <br>
         <mat-card-content>
-            <form class="profile-form">
+            <form class="profile-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-row">
                     <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
-                        <input matInput placeholder="First Name">
+                        <input formControlName="firstName" matInput placeholder="First Name">
                         <mat-icon matSuffix>person</mat-icon>
                     </mat-form-field>
                 </div>
@@ -17,7 +17,7 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Last Name</mat-label>
-                        <input matInput placeholder="LastName">
+                        <input formControlName="lastName" matInput placeholder="Last Name">
                         <mat-icon matSuffix>person</mat-icon>
                     </mat-form-field>
                 </div>
@@ -25,7 +25,7 @@
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Email Address</mat-label>
-                        <input matInput type="email" placeholder="Ex. john@school.com">
+                        <input matInput type="email" formControlName="email" placeholder="Ex. john@school.com">
                         <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
                 </div>
@@ -33,21 +33,31 @@
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input matInput type="password">
+                        <input matInput type="password" formControlName="password">
                         <mat-icon matSuffix>password</mat-icon>
                     </mat-form-field>
                 </div>
-                
+
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Confirm Passsword</mat-label>
-                        <input matInput type="password">
+                        <input matInput type="password" formControlName="confirmPassword">
                         <mat-icon matSuffix>password</mat-icon>
                     </mat-form-field>
                 </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enrollment Date</mat-label>
+                        <!-- type="date" ensures the native browser calendar picker shows up -->
+                        <input matInput formControlName="enrollmentDate" type="datetime-local" style="width:100%">
+                    </mat-form-field>
+                </div>
+
                 <div class="form-actions">
-                    <button mat-stroked-button type="button">Cancel</button>
-                    <button mat-raised-button color="primary" type="submit">Create Profile</button>
+                    <button mat-stroked-button (click)="onReset()" type="button">Cancel</button>
+                    <button mat-raised-button [disabled]="registerForm.invalid" color="primary" type="submit">Create
+                        Profile</button>
                 </div>
 
             </form>
