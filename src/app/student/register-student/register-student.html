@@ -20,12 +20,13 @@
                         <input formControlName="lastName" matInput placeholder="Last Name">
                         <mat-icon matSuffix>person</mat-icon>
                     </mat-form-field>
+
                 </div>
 
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Email Address</mat-label>
-                        <input matInput type="email" formControlName="email" placeholder="Ex. john@school.com">
+                        <input matInput   formControlName="email" placeholder="Ex. john@school.com">
                         <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
                 </div>
@@ -49,7 +50,6 @@
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Enrollment Date</mat-label>
-                        <!-- type="date" ensures the native browser calendar picker shows up -->
                         <input matInput formControlName="enrollmentDate" type="datetime-local" style="width:100%">
                     </mat-form-field>
                 </div>
@@ -63,4 +63,33 @@
             </form>
         </mat-card-content>
     </mat-card>
+    <ul>
+        @if (registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched) {
+        <li>First Name is required</li> }
+        @if (registerForm.get('firstName')?.hasError('whitespace') && registerForm.get('firstName')?.touched) {
+        <li>First Name cannot be empty or whitespace</li> }
+        @if (registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched) {
+        <li>Last Name is required</li> }
+        @if (registerForm.get('lastName')?.hasError('whitespace') && registerForm.get('lastName')?.touched) {
+        <li>Last Name cannot be empty or whitespace</li> }
+        @if (registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched) {
+        <li>Email is required</li> }
+        @if (registerForm.get('email')?.hasError('whitespace') && registerForm.get('email')?.touched) {
+        <li>Email cannot be empty or whitespace</li> }
+        @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+        <li>Email is Invalid</li> }
+        @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
+        <li>Password is required</li> }
+        @if (registerForm.get('password')?.hasError('whitespace') && registerForm.get('password')?.touched) {
+        <li>Password cannot be empty or whitespace</li> }
+        @if (registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched) {
+        <li>Password must be at least 6 characters long</li> }
+        @if (registerForm.get('enrollmentDate')?.hasError('required') && registerForm.get('enrollmentDate')?.touched) {
+        <li>Enrollment Date is Required</li> }
+
+
+        
+
+
+    </ul>
 </div>
