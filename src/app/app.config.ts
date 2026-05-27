@@ -4,7 +4,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { ConfigService } from './config-service';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-  
+
 
 function initializeApp(configService: ConfigService) {
   return () => configService.loadConfig();
@@ -13,7 +13,7 @@ function initializeApp(configService: ConfigService) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-      importProvidersFrom(MatSnackBarModule),
+    importProvidersFrom(MatSnackBarModule),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), provideHttpClient(),
     provideAppInitializer(() => {

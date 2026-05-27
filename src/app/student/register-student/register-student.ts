@@ -140,6 +140,13 @@ export class RegisterStudent {
 
     this.http.post(`${backendAddress}api/User/register/student`, applicationUser).subscribe({
       next: (response) => {
+
+        this.snackBar.open('Profile Registered Successfully', 'Close', {
+          duration: 5000,
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
+        });
+
         this.mainForm.resetForm();
         this.onReset();
       },
