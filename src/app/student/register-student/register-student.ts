@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CustomValidators } from '../../validations/custom-validators';
 
@@ -33,6 +33,17 @@ export class RegisterStudent {
 
   }
 
+passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+     if (!password || password.trim().length === 0) {
+      return null;
+    }
+
+     return password === confirmPassword ? null : { passwordMismatch: true };
+  };
+
 
 
   registerForm: FormGroup;
@@ -58,7 +69,7 @@ export class RegisterStudent {
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],
         confirmPassword: ['', [Validators.required]]
-      }, { validators: [] }),
+      }, { validators: [this.passwordMatchValidator] }),
       enrollmentDate: [
         (() => {
           const d = new Date();

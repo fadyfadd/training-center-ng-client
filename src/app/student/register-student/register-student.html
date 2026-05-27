@@ -90,6 +90,8 @@
         <li>Password must be at least 6 characters long</li> }
         @if (registerForm.get('enrollmentDate')?.hasError('required') && registerForm.get('enrollmentDate')?.touched) {
         <li>Enrollment Date is Required</li> }
+        @if (registerForm.get('passwords')?.hasError('passwordMismatch') && registerForm.get('passwords')?.touched) {
+        <li>Passwords do not match</li> }
 
 
 
