@@ -30,6 +30,13 @@
                         <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
                 </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="userName">
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+                </div>
 
                 <div formGroupName="passwords">
                     <div>
@@ -79,6 +86,19 @@
         <li>Email cannot be empty or whitespace</li> }
         @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
         <li>Email is Invalid</li> }
+
+        @if (registerForm.get('userName')?.hasError('required') &&
+        registerForm.get('userName')?.touched) {
+        <li>UserName is required</li> }
+        @if (registerForm.get('userName')?.hasError('whitespace') &&
+        registerForm.get('userName')?.touched) {
+        <li>userName cannot be empty or whitespace</li> }
+        @if (registerForm.get('userName')?.hasError('minlength') &&
+        registerForm.get('userName')?.touched) {
+        <li>Username must be at least 6 characters long</li> }
+
+
+
         @if (registerForm.get('passwords')?.get('password')?.hasError('required') &&
         registerForm.get('passwords')?.get('password')?.touched) {
         <li>Password is required</li> }

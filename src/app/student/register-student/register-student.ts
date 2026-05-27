@@ -17,31 +17,37 @@ import { CustomValidators } from '../../validations/custom-validators';
 export class RegisterStudent {
 
 
-
-
   onReset() {
-    this.registerForm.reset();
+
+    const d = new Date();
+    var currentDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     this.registerForm.markAsPristine();
     this.registerForm.markAsUntouched();
+    this.registerForm.reset({ enrollmentDate: currentDate });
   }
 
   onSubmit() {
+
+    var student = {
+      firstName: this.registerForm.get('firstName')?.value,
+      lastName: this.registerForm.get('lastName')?.value,
+      enrollmentDate: this.registerForm.get('enrollmentDate')?.value
+    };
+
     console.log(this.registerForm.value);
-    this.registerForm.reset();
-    this.registerForm.markAsPristine();
-    this.registerForm.markAsUntouched();
+    this.onReset();
 
   }
 
-passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
 
-     if (!password || password.trim().length === 0) {
+    if (!password || password.trim().length === 0) {
       return null;
     }
 
-     return password === confirmPassword ? null : { passwordMismatch: true };
+    return password === confirmPassword ? null : { passwordMismatch: true };
   };
 
 
@@ -65,6 +71,7 @@ passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErro
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, CustomValidators.noWhitespace()]],
       lastName: ['', [Validators.required, CustomValidators.noWhitespace()]],
+      userName: ['', [Validators.required, CustomValidators.noWhitespace(), Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email, CustomValidators.noWhitespace()]],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), CustomValidators.noWhitespace()]],

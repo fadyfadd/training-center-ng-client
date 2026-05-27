@@ -7,6 +7,5 @@
         email: string;
         plainPassword: string;
 
-
     }
  
