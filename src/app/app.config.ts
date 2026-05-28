@@ -6,11 +6,6 @@ import { ConfigService } from './config-service';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 
-function initializeApp(configService: ConfigService) {
-  return () => configService.loadConfig();
-}
-
-
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(MatSnackBarModule),
