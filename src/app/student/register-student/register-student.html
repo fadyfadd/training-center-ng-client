@@ -6,7 +6,7 @@
         <br>
         <mat-card-content>
             <form class="profile-form" [formGroup]="registerForm" #form="ngForm"  (ngSubmit)="onSubmit()">
-                <div class="form-row">
+                <div>
                     <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
                         <input formControlName="firstName" matInput placeholder="First Name">
@@ -62,7 +62,7 @@
                     </mat-form-field>
                 </div>
 
-                <div class="form-actions">
+                <div>
                     <button mat-stroked-button (click)="onReset()" type="button">Cancel</button>
                     <button mat-raised-button [disabled]="registerForm.invalid" color="primary" type="submit">Create
                         Profile</button>
