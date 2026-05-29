@@ -74,7 +74,7 @@ export class AllCourses implements OnInit, AfterViewInit {
 
 
     let backendAddress = this.configService.get(APP_BACKEND_SERVER);
-    this.http.get<CourseDto[]>(`${backendAddress}courses`).subscribe((data) => {
+    this.http.get<CourseDto[]>(`${backendAddress}api/course/courses`).subscribe((data) => {
       this.dataSource.data = data;
     });
 
