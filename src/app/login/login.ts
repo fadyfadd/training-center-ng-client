@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRole } from '../enums/user-role';
+import { Authentication } from '../authentication';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class Login {
 
 
   private configService: any = inject(ConfigService);
+  private authentication: any = inject(Authentication);
 
   public onSubmit() {
     if (this.loginForm.invalid)
@@ -51,6 +53,7 @@ export class Login {
         next: (response: JwtTokenDto) => {
 
           if (response.role === UserRole.Student) {
+            this.authentication.setAuthentication(response);
             this.router.navigate(["/student", "home"]);
           }          
         },
