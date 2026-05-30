@@ -3,7 +3,7 @@ import { Authentication } from './authentication';
 import { inject } from '@angular/core';
 
 
-export const roleGuardGuard: CanActivateFn = (route, state) => {
+export const roleGuard: CanActivateFn = (route, state) => {
 
   const authentication = inject(Authentication);
 

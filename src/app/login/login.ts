@@ -56,6 +56,11 @@ export class Login {
             this.authentication.setAuthentication(response);
             this.router.navigate(["/student", "home"]);
           }
+          else {
+            this.authentication.setAuthentication(response);
+            this.router.navigate(["/admin", "home"]);
+          }
+
         },
         error: (error: any) => {
           this.snackBar.open("Login failed. Please check your credentials and try again.", "Close", {
