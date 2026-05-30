@@ -98,14 +98,14 @@ export class RegisterStudent {
 
         this.snackBar.open(firstError, 'Close', {
           duration: 5000,
-          horizontalPosition: 'left',
+          horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
       }
       else {
         this.snackBar.open('Registration Error', 'Close', {
           duration: 5000,
-          horizontalPosition: 'left',
+          horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
 
@@ -114,7 +114,7 @@ export class RegisterStudent {
     else {
       this.snackBar.open('Registration Error', 'Close', {
         duration: 5000,
-        horizontalPosition: 'left',
+        horizontalPosition: 'center',
         verticalPosition: 'bottom',
       });
     }

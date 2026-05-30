@@ -1,0 +1,36 @@
+<div class="login-container">
+    <mat-card class="login-card">
+
+        <!-- Header Section -->
+        <mat-card-header>
+            <mat-card-title>Welcome Back</mat-card-title>
+            <mat-card-subtitle>Sign in to your account to continue</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput type="email" placeholder="name@example.com">
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter your password">
+                    <button mat-icon-button matSuffix type="button">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <button (click)="onClick()" mat-raised-button color="primary" class="full-width submit-btn"
+                    type="button">
+                    <span>Sign In</span>
+                </button>
+
+            </form>
+        </mat-card-content>
+
+    </mat-card>
+</div>
