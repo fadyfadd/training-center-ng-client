@@ -35,7 +35,7 @@ export class Login {
     let backendAddress = this.configService.get(APP_BACKEND_SERVER);
     this.http.post<JwtTokenDto>(`${backendAddress}api/user/login`, {
       userName: "ziad.achkar@yahoo.com",
-      password: "Password123!`"
+      password: "Password123!"
 
     }).subscribe(
       {
