@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRole } from '../enums/user-role';
 import { Authentication } from '../authentication';
+import { Notification } from '../notification';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class Login {
   private http = inject(HttpClient);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private notification = inject(Notification);
 
   private fb = inject(FormBuilder);
 
@@ -63,11 +65,8 @@ export class Login {
 
         },
         error: (error: any) => {
-          this.snackBar.open("Login failed. Please check your credentials and try again.", "Close", {
-            duration: 5000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-          });
+          console.log("error")
+          this.notification.showError("Login failed. Please check your credentials and try again.");  
         }
       }
     );

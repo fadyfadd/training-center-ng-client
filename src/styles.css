@@ -14,3 +14,47 @@ html,
 mat-form-field {
   width: 100%;
 }
+
+
+/* Modern Angular Material Success Snackbar Layout */
+.mat-mdc-snack-bar-container {
+
+  &.bg-success {
+     border: 5px solid #2e7d32 !important; 
+    border-radius: 8px !important;
+
+     .mdc-snackbar__surface {
+      background-color: #e8f5e9 !important; 
+    }
+
+     .mdc-snackbar__label {
+      color: #1b5e20 !important;  
+      font-weight: 500 !important;
+    }
+
+    .mat-mdc-snack-bar-action {
+      color: #2e7d32 !important; 
+    }
+  }
+}
+
+ 
+ 
+.mat-mdc-snack-bar-container.bg-error {
+    border: 5px solid #d32f2f !important; 
+    border-radius: 8px !important;
+
+     .mdc-snackbar__surface {
+      background-color: #ffebee !important; /* Very light red background to match the border */
+    }
+
+     .mdc-snackbar__label {
+      color: #b71c1c !important; /* Rich dark red text */
+      font-weight: 500 !important;
+    }
+
+    .mat-mdc-snack-bar-action {
+      color: #d32f2f !important; /* Bold red close action button */
+    }
+  }
+ 

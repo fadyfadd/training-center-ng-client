@@ -24,7 +24,7 @@
                     </button>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" class="full-width submit-btn"
+                <button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="full-width submit-btn"
                     >
                     <span>Sign In</span>
                 </button>
