@@ -20,41 +20,65 @@ mat-form-field {
 .mat-mdc-snack-bar-container {
 
   &.bg-success {
-     border: 5px solid #2e7d32 !important; 
+    border: 5px solid #2e7d32 !important;
     border-radius: 8px !important;
 
-     .mdc-snackbar__surface {
-      background-color: #e8f5e9 !important; 
+    .mdc-snackbar__surface {
+      background-color: #e8f5e9 !important;
     }
 
-     .mdc-snackbar__label {
-      color: #1b5e20 !important;  
+    .mdc-snackbar__label {
+      color: #1b5e20 !important;
       font-weight: 500 !important;
     }
 
     .mat-mdc-snack-bar-action {
-      color: #2e7d32 !important; 
+      color: #2e7d32 !important;
     }
   }
 }
 
- 
- 
+
+.navbar-links a {
+  color: #333333 !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+  color: #1a0dab !important;
+}
+
+.navbar-links a.active-link {
+  color: #1a0dab !important;
+  font-weight: bold;
+}
+
+.navbar-links a.active-link {
+  color: #1a0dab !important;
+  font-weight: bold;
+}
+
+
+
 .mat-mdc-snack-bar-container.bg-error {
-    border: 5px solid #d32f2f !important; 
-    border-radius: 8px !important;
+  border: 5px solid #d32f2f !important;
+  border-radius: 8px !important;
 
-     .mdc-snackbar__surface {
-      background-color: #ffebee !important; /* Very light red background to match the border */
-    }
-
-     .mdc-snackbar__label {
-      color: #b71c1c !important; /* Rich dark red text */
-      font-weight: 500 !important;
-    }
-
-    .mat-mdc-snack-bar-action {
-      color: #d32f2f !important; /* Bold red close action button */
-    }
+  .mdc-snackbar__surface {
+    background-color: #ffebee !important;
+    /* Very light red background to match the border */
   }
- 
+
+  .mdc-snackbar__label {
+    color: #b71c1c !important;
+    /* Rich dark red text */
+    font-weight: 500 !important;
+  }
+
+  .mat-mdc-snack-bar-action {
+    color: #d32f2f !important;
+    /* Bold red close action button */
+  }
+}

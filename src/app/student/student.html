@@ -1,5 +1,7 @@
-<a [routerLink]="['/home']">Main Home</a> | 
-<a [routerLink]="['/student/home']">Student Home</a> 
+<div class="navbar-links">
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/home']">Main Home</a> |
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/student/home']">Student Home</a>
+</div>
 
-<hr> 
-<router-outlet></router-outlet> 
+<hr>
+<router-outlet></router-outlet>

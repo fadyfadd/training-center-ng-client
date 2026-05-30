@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { APP_BACKEND_SERVER, ConfigService } from '../config-service';
 import { JwtTokenDto } from '../dtos/jwt-token-dto';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRole } from '../enums/user-role';
@@ -20,11 +20,20 @@ import { Notification } from '../notification';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule, ReactiveFormsModule],
+    MatIconModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
+
+  ngOnInit() {
+    this.authentication.clearAuthentication();
+  }
+
+  logout(event: PointerEvent) {
+    event.preventDefault();
+    this.router.navigate(['/home']);
+  }
 
   private http = inject(HttpClient);
   private router = inject(Router);
@@ -66,7 +75,7 @@ export class Login {
         },
         error: (error: any) => {
           console.log("error")
-          this.notification.showError("Login failed. Please check your credentials and try again.");  
+          this.notification.showError("Login failed. Please check your credentials and try again.");
         }
       }
     );

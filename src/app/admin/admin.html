@@ -1,8 +1,10 @@
-<a [routerLink]="['/home']">Main Home</a> | 
-<a [routerLink]="['/admin/home']">Admin Home</a> | 
-<a [routerLink]="['/admin/register-student']">Register Student</a>
- | <a [routerLink]="['/admin/all-courses']">All Courses</a>
+<div class="navbar-links">
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/home']">Main Home</a> |
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/admin/home']">Admin Home</a> |
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/admin/register-student']">Register Student</a> |
+    <a [routerLinkActive]="'active-link'" [routerLink]="['/admin/all-courses']">All Courses</a> |
+    <a style="cursor: pointer;" role="button" (click)="logout($event)">Logout </a>
+</div>
+
 <hr>
 <router-outlet></router-outlet>
-
-
