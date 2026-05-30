@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JwtTokenDto } from './dtos/jwt-token';
+import { JwtTokenDto } from './dtos/jwt-token-dto';
 
 @Injectable({
   providedIn: 'root',

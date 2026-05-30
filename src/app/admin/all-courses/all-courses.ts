@@ -4,7 +4,7 @@ import { ConfigService } from '../../config-service';
 import { APP_BACKEND_SERVER } from '../../config-service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
-import { CourseDto } from '../dtos';
+import {CourseDto} from "../../dtos/course-dto"
 import { CommonModule } from '@angular/common';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';

@@ -10,7 +10,6 @@ export const routes: Routes = [
         "path": "student", loadChildren: () => import("./student/student.routes").then(m => m.routes),
         canActivate: [roleGuardGuard], data: { roles: [UserRole.Student] }
     },
-    { "path": "course", loadChildren: () => import("./course/course.routes").then(m => m.routes) },
     { "path": "login", loadComponent: () => import("./login/login").then(m => m.Login) },
     { "path": "", "redirectTo": "home", pathMatch: "full" }
 

@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { APP_BACKEND_SERVER, ConfigService } from '../config-service';
-import { JwtTokenDto } from '../dtos/jwt-token';
+import { JwtTokenDto } from '../dtos/jwt-token-dto';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -55,7 +55,7 @@ export class Login {
           if (response.role === UserRole.Student) {
             this.authentication.setAuthentication(response);
             this.router.navigate(["/student", "home"]);
-          }          
+          }
         },
         error: (error: any) => {
           this.snackBar.open("Login failed. Please check your credentials and try again.", "Close", {
